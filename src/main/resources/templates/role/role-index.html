@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<head>
+    <title>Trang chủ</title>
+</head>
+<body>
+<div class="main-body" layout:fragment="content">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item"><a href="/admin"> <i
+                                class="feather icon-home"></i> Trang chủ
+                        </a></li>
+                        <li class="breadcrumb-item"><a href="#!">Danh sách quyền</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card px-3">
+                    <div class="card-header px-0 pb-2">
+                        <h2 class="text-uppercase text-center">Danh sách quyền</h2>
+                        <a th:href="@{role/add}" class="btn btn-sm btn-primary">Thêm mới</a>
+                    </div>
+                    <div class="card-block table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Quyền</th>
+                                    <th>Mô Tả</th>
+                                    <th>Hành Động</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbodyRole" ng-app="dataRemote" ng-controller="role-all">
+                                <tr ng-repeat="role in roles">
+                                    <td>{{$index + 1}}</td>
+                                    <td>{{role.name}}</td>
+                                    <td>{{role.description}}</td>
+                                    <td>
+                                        <a href="/role/edit?id={{role.id}}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+                                        <a href="/role/delete?id={{role.id}}"
+                                           class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+                                    </td>
+                                </tr>
+                                <!--                                body by jquery-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script layout:fragment="inner-script">
+</script>
+</body>
+</html>

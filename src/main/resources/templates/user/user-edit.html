@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <title>Trang chủ</title>
+</head>
+<body>
+<div class="main-body" layout:fragment="content">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item"><a href="/admin"> <i
+                                class="feather icon-home"></i> Trang chủ
+                        </a></li>
+                        <li class="breadcrumb-item">
+                            <a th:href="@{/user/edit}">Sửa thông tin tài khoản</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-uppercase text-center">Sửa thông tin tài khoản</h2>
+                    </div>
+                    <div class="card-block">
+                        <form action="#" th:action="@{/user/edit}" th:object="${user}" th:method="post">
+                            <input type="text" th:field="*{id}" hidden>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Họ tên</label>
+                                        <input type="text" th:field="*{fullname}" name="fullname" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" th:field="*{email}" name="email" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Avatar</label>
+                                        <input type="text" th:field="*{avatar}" name="avatar" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Điện thoại</label>
+                                        <input type="text" th:field="*{phone}" name="phone" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" th:field="*{address}" name="address" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Loại người dùng</label>
+                                        <select th:field="*{roleId}" name="roleId" id="" class="form-control">
+                                            <option th:each="item : ${roles}"
+                                                    th:value="${item.id}"
+                                                    th:text="${item.description}"
+                                            >
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary m-b-0">Lưu lại</button>
+                                        <a th:href="@{/user}" class="btn btn-secondary text-white">Quay lại</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script layout:fragment="inner-script">
+</script>
+</body>
+</html>

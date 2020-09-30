@@ -4,16 +4,17 @@ import com.myclass.elearning.dto.CategoryGetDto;
 import com.myclass.elearning.dto.CategoryPostDto;
 import com.myclass.elearning.dto.CategoryPutDto;
 import com.myclass.elearning.entity.Category;
-import com.myclass.elearning.exception.CategoryNotFoundException;
 import com.myclass.elearning.repo.CategoryRepo;
 import com.myclass.elearning.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class CategoryServiceImp implements CategoryService {
     private final CategoryRepo categoryRepo;
     private final ModelMapper modelMapper;
@@ -24,19 +25,25 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public List<CategoryGetDto> findAll() {
+    public List<Category> findAll() {
+        return categoryRepo.findAll();
+    }
+
+    @Override
+    public Category findById(int id) {
+        return categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với id = " + id));
+    }
+
+    @Override
+    public List<CategoryGetDto> getAllDto() {
         return categoryRepo.findAll().stream()
                 .map(category -> modelMapper.map(category, CategoryGetDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Category findById(int id) {
-        return categoryRepo.findById(id).orElseThrow(CategoryNotFoundException::new);
-    }
-
-    @Override
-    public CategoryGetDto get(int id) {
+    public CategoryGetDto getDto(int id) {
         Category category = findById(id);
         return modelMapper.map(category, CategoryGetDto.class);
     }
@@ -63,4 +70,5 @@ public class CategoryServiceImp implements CategoryService {
         if (categoryRepo.findById(category.getId()).isPresent())
             categoryRepo.save(category);
     }
+
 }

@@ -44,8 +44,8 @@
                                     <td th:text="${item.email}">teonguyen@gmail.com</td>
                                     <td th:text="${item.phone}">01234567899</td>
                                     <td>
-                                        <a th:href="@{/user/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
-                                        <a th:href="@{/user/delete(id=${item.id})}" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+                                        <a th:href="@{/admin/user/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+                                        <a th:href="@{/admin/user/delete(id=${item.id})}" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
                                     </td>
                                 </tr>
                                 </tbody>

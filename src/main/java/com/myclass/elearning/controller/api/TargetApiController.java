@@ -1,13 +1,10 @@
 package com.myclass.elearning.controller.api;
 
 import com.myclass.elearning.entity.Target;
-import com.myclass.elearning.exception.TargetNotFoundException;
 import com.myclass.elearning.service.TargetService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/targets")
@@ -24,7 +21,7 @@ public class TargetApiController {
     }
 
     @GetMapping("/{id}")
-    public Object one(@PathVariable int id) throws TargetNotFoundException {
+    public Object one(@PathVariable int id)  {
         return new ResponseEntity<>(targetService.findById(id), HttpStatus.OK);
     }
 
@@ -41,7 +38,7 @@ public class TargetApiController {
     }
 
     @DeleteMapping("/{id}")
-    public Object delete(@PathVariable int id) throws TargetNotFoundException {
+    public Object delete(@PathVariable int id)  {
         targetService.delete(id);
         return new ResponseEntity<>("Xóa mục tiêu thành công", HttpStatus.OK);
     }

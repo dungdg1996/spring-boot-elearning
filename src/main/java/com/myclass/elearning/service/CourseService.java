@@ -8,13 +8,17 @@ import com.myclass.elearning.entity.Course;
 import java.util.List;
 
 public interface CourseService {
-    List<CourseGetDto> findAll();
+    List<Course> findAll();
 
-    List<CourseGetDto> findByCategoryId(int categoryId);
+    Course findById(Integer id);
 
-    List<CourseGetDto> findByUserId(int UserId);
+    CourseGetDto getDto(Integer id);
 
-    CourseGetDto get(int id);
+    List<CourseGetDto> getAllDto();
+
+    List<CourseGetDto> search(Integer categoryId, String key);
+
+    List<CourseGetDto> findByUserEmail(String email);
 
     void delete(Integer Course);
 

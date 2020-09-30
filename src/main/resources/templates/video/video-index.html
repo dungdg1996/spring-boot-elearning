@@ -42,12 +42,12 @@
                                     <th th:text="${itemStat.count}">1</th>
                                     <td th:text="${item.title}">Giới thiệu tổng quan</td>
                                     <td>
-                                        <img th:src="@{/images/1.png}" height="50" class="p-1 border" />
+                                        <img th:src="${item.image}" height="50" class="p-1 border" />
                                     </td>
                                     <td th:text="${item.timeCount}">12 phút</td>
                                     <td>
-                                        <a th:href="@{/video/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
-                                        <a th:href="@{/video/delete(id=${item.id})}" href="#" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+                                        <a th:href="@{/admin/video/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+                                        <a th:href="@{/admin/video/delete(id=${item.id})}" href="#" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
                                     </td>
                                 </tr>
                                 </tbody>

@@ -1,10 +1,7 @@
 package com.myclass.elearning.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -16,16 +13,14 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @NotBlank(message = "Tiêu đề không được trống")
     private String title;
     @NotBlank(message = "Bạn chưa chọn hình ảnh")
@@ -45,21 +40,27 @@ public class Course {
     @NotBlank(message = "Nội dung không được trống")
     private String content;
 
-    private int categoryId;
-
     private int viewCount;
 
     private Date lastUpdate;
+
+    @Column(name = "category_id")
+    private int categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id",
+            updatable = false, insertable = false)
+    private Category category;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
     private Set<User> users;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "courseId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "courseId", fetch = FetchType.LAZY)
     private Set<Target> targets;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "courseId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "courseId", fetch = FetchType.LAZY)
     private Set<Video> videos;
 }

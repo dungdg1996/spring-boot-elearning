@@ -1,16 +1,20 @@
 package com.myclass.elearning.service;
 
+import com.myclass.elearning.dto.VideoGetDto;
 import com.myclass.elearning.dto.VideoPostDto;
 import com.myclass.elearning.dto.VideoPutDto;
 import com.myclass.elearning.entity.Video;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface VideoService {
     List<Video> findAll();
 
-    Optional<Video> findById(int id);
+    Video findById(Integer id);
+
+    VideoGetDto getDto(Integer id);
+
+    List<VideoGetDto> getAllDto();
 
     void delete(Video Video);
 

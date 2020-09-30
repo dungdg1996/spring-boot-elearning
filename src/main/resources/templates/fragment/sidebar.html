@@ -8,37 +8,37 @@
                 </a>
             </li>
             <li class="">
-                <a th:href="@{/category}">
+                <a th:href="@{/admin/category}">
                     <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                     <span class="pcoded-mtext">Danh mục</span>
                 </a>
             </li>
             <li class="">
-                <a th:href="@{/course}">
+                <a th:href="@{/admin/course}">
                     <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                     <span class="pcoded-mtext">Khóa học</span>
                 </a>
             </li>
             <li class="">
-                <a th:href="@{/video}">
+                <a th:href="@{/admin/video}">
                     <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                     <span class="pcoded-mtext">Video</span>
                 </a>
             </li>
             <li class="">
-                <a th:href="@{/target}">
+                <a th:href="@{/admin/target}">
                     <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                     <span class="pcoded-mtext">Mục tiêu</span>
                 </a>
             </li>
             <li class="">
-                <a th:href="@{/user}">
+                <a th:href="@{/admin/user}">
                     <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                     <span class="pcoded-mtext">Tài khoản</span>
                 </a>
             </li>
-            <li class="">
-                <a th:href="@{/role}">
+            <li sec:authorize="hasRole('ADMIN')" class="">
+                <a th:href="@{/admin/role}">
                     <span class="pcoded-micon"><i class="feather icon-user"></i></span>
                     <span class="pcoded-mtext">Quyền</span>
                 </a>

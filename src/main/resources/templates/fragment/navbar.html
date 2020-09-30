@@ -46,9 +46,9 @@
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
                         <div class="dropdown-toggle" data-toggle="dropdown">
-                            <img th:src="@{/images/avatar-4.jpg}" class="img-radius"
+                            <img th:src="${session.user.avatar}" class="img-radius"
                                  alt="User-Profile-Image">
-                            <span>John Doe</span>
+                            <span th:text="${session.user.fullname}"></span>
                             <i class="feather icon-chevron-down"></i>
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu"
@@ -59,12 +59,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="user-profile.htm">
+                                <a th:href="@{/admin/user/profile}">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
                             </li>
                             <li>
-                                <a href="auth-normal-sign-in.htm">
+                                <a th:href="@{/admin/logout}">
                                     <i class="feather icon-log-out"></i> Logout
                                 </a>
                             </li>

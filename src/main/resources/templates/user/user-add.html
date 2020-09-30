@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item"><a href="/admin"> <i
                                 class="feather icon-home"></i> Trang chủ
                         </a></li>
-                        <li class="breadcrumb-item"><a th:href="@{/user/add}">Thêm mới tài khoản</a></li>
+                        <li class="breadcrumb-item"><a th:href="@{/admin/user/add}">Thêm mới tài khoản</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <h2 class="text-uppercase text-center">Thêm mới tài khoản</h2>
                     </div>
                     <div class="card-block">
-                        <form th:action="@{/user/add}" th:object="${user}" th:method="post">
+                        <form th:action="@{/admin/user/add}" th:object="${user}" th:method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Nhập lại mật khẩu</label>
-                                        <input type="text" th:field="*{confirm}" name="confirm" class="form-control"/>
+                                        <input type="password" th:field="*{confirm}" name="confirm" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Avatar</label>
-                                        <input type="text" th:field="*{avatar}" name="avatar" class="form-control"/>
+                                        <input type="file" th:field="*{avatar}" name="avatar" class="form-control"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Loại người dùng</label>
@@ -74,7 +74,7 @@
                                 <div class="col-12 mt-3">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary m-b-0">Lưu lại</button>
-                                        <a th:href="@{/user}" class="btn btn-secondary text-white">Quay lại</a>
+                                        <a th:href="@{/admin/user}" class="btn btn-secondary text-white">Quay lại</a>
                                     </div>
                                 </div>
                             </div>

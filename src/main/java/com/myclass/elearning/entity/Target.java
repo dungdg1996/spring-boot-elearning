@@ -1,16 +1,13 @@
 package com.myclass.elearning.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "targets")
 public class Target {
@@ -23,5 +20,10 @@ public class Target {
 
     @Column(name = "course_id")
     private int courseId;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "id",
+            updatable = false, insertable = false)
+    private Course course;
 
 }

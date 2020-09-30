@@ -1,22 +1,23 @@
 package com.myclass.elearning.dto;
 
-import com.myclass.elearning.entity.Target;
-import com.myclass.elearning.entity.Video;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
-import java.sql.Date;
-import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class CoursePostDto {
+    @JsonIgnore
+    private Integer id;
+
     private String title;
-    private String image;
     private int lecturesCount;
     private int hourCount;
-    private int viewCount;
+    private int categoryId;
     private double price;
     private int discount;
     private String description;
     private String content;
-    private int categoryId;
+
+    @JsonIgnore
+    private MultipartFile image;
 }

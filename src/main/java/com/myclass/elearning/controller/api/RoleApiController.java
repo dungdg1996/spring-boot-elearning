@@ -1,7 +1,6 @@
 package com.myclass.elearning.controller.api;
 
 import com.myclass.elearning.entity.Role;
-import com.myclass.elearning.exception.RoleNotFoundException;
 import com.myclass.elearning.service.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +50,7 @@ public class RoleApiController {
     }
 
     @DeleteMapping("/{id}")
-    public Object delete(@PathVariable int id) throws RoleNotFoundException {
+    public Object delete(@PathVariable int id) {
         try {
             roleService.delete(id);
             return new ResponseEntity<>("Xóa quyền thành công", HttpStatus.OK);

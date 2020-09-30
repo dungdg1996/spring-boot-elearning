@@ -8,11 +8,13 @@ import com.myclass.elearning.entity.Category;
 import java.util.List;
 
 public interface CategoryService {
-    List<CategoryGetDto> findAll();
+    List<Category> findAll();
 
     Category findById(int id);
 
-    CategoryGetDto get(int id);
+    List<CategoryGetDto> getAllDto();
+
+    CategoryGetDto getDto(int id);
 
     void delete(Integer id);
 
@@ -21,4 +23,6 @@ public interface CategoryService {
     void save(CategoryPostDto postDto);
 
     void save(CategoryPutDto putDto);
+
+
 }

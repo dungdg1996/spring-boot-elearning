@@ -49,23 +49,27 @@ public class JwtTokenProvider {
     }
 
     public Authentication authentication(HttpServletRequest request) {
-        String tokenBearer = request.getHeader("Authorization");
-        if (tokenBearer != null && tokenBearer.startsWith("Bearer ")) {
-            String token = tokenBearer.replace("Bearer ", "");
+        try {
+            String tokenBearer = request.getHeader("Authorization");
+            if (tokenBearer != null && tokenBearer.startsWith("Bearer ")) {
+                String token = tokenBearer.replace("Bearer ", "");
 
-            Claims body = Jwts.parser()
-                    .setSigningKey(jwtSecretEncode)
-                    .parseClaimsJws(token)
-                    .getBody();
+                Claims body = Jwts.parser()
+                        .setSigningKey(jwtSecretEncode)
+                        .parseClaimsJws(token)
+                        .getBody();
 
-            String email = body.getSubject();
-            Date expiration = body.getExpiration();
-            Date current = new Date();
+                String email = body.getSubject();
+                Date expiration = body.getExpiration();
+                Date current = new Date();
 
-            if (current.getTime() < expiration.getTime()) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-                return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                if (current.getTime() < expiration.getTime()) {
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                    return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                }
             }
+        } catch (Exception e){
+            System.out.println("Truy cập bị từ chối");
         }
         return null;
     }

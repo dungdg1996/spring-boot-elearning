@@ -24,7 +24,7 @@
                 <div class="card px-3">
                     <div class="card-header px-0 pb-2">
                         <h2 class="text-uppercase text-center">Danh sách danh mục</h2>
-                        <a th:href="@{/category/add}" class="btn btn-sm btn-primary">Thêm mới</a>
+                        <a th:href="@{/admin/category/add}" class="btn btn-sm btn-primary">Thêm mới</a>
                     </div>
                     <div class="card-block table-border-style">
                         <div class="table-responsive">
@@ -45,8 +45,8 @@
                                         <h4><i class="fa" th:classappend="${item.icon}"></i></h4>
                                     </td>
                                     <td>
-                                        <a th:href="@{/category/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
-                                        <a th:href="@{/category/delete(id=${item.id})}" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+                                        <a th:href="@{/admin/category/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+                                        <a th:href="@{/admin/category/delete(id=${item.id})}" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
                                     </td>
                                 </tr>
                                 </tbody>

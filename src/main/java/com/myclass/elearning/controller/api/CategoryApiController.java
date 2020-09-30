@@ -2,7 +2,6 @@ package com.myclass.elearning.controller.api;
 
 import com.myclass.elearning.dto.CategoryPostDto;
 import com.myclass.elearning.dto.CategoryPutDto;
-import com.myclass.elearning.exception.CategoryNotFoundException;
 import com.myclass.elearning.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,24 +18,26 @@ public class CategoryApiController {
 
     @GetMapping
     public Object all() {
-        return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
+        return ResponseEntity.ok()
+                .body(categoryService.getAllDto());
     }
 
     @GetMapping("/{id}")
-    public Object one(@PathVariable int id) throws CategoryNotFoundException {
-        return new ResponseEntity<>(categoryService.findById(id), HttpStatus.OK);
+    public Object one(@PathVariable int id) {
+        return ResponseEntity.ok()
+                .body(categoryService.findById(id));
+    }
+
+    @GetMapping("/{id}/details")
+    public Object details(@PathVariable int id) {
+        return  ResponseEntity.ok()
+                .body(categoryService.getDto(id));
     }
 
     @PostMapping
     public Object add(@RequestBody CategoryPostDto dto) {
-        try {
-            categoryService.save(dto);
-            return new ResponseEntity<>("Thêm mới danh mục thành công", HttpStatus.CREATED);
-        } catch (Exception e){
-            return new ResponseEntity<>("Thêm mới danh mục thất bại " + e.getMessage(),
-                    HttpStatus.BAD_REQUEST);
-        }
-
+        categoryService.save(dto);
+        return new ResponseEntity<>("Thêm mới danh mục thành công", HttpStatus.CREATED);
     }
 
     @PutMapping
@@ -44,7 +45,7 @@ public class CategoryApiController {
         try {
             categoryService.save(dto);
             return new ResponseEntity<>("Lưu danh mục thành công", HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>("Lưu danh mục thất bại " + e.getMessage(),
                     HttpStatus.BAD_REQUEST);
         }
@@ -52,11 +53,11 @@ public class CategoryApiController {
     }
 
     @DeleteMapping("/{id}")
-    public Object delete(@PathVariable int id)  {
+    public Object delete(@PathVariable int id) {
         try {
             categoryService.delete(id);
             return new ResponseEntity<>("Xóa danh mục thành công", HttpStatus.OK);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>("Xóa danh mục thất bại : " + e.getMessage(),
                     HttpStatus.BAD_REQUEST);
         }

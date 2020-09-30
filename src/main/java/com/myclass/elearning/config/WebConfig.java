@@ -31,8 +31,4 @@ public class WebConfig {
         return modelMapper;
     }
 
-    @Bean
-    StorageProperties storageProperties(){
-        return new StorageProperties();
-    }
 }

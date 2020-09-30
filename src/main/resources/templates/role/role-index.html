@@ -37,15 +37,14 @@
                                     <th>Hành Động</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tbodyRole" ng-app="dataRemote" ng-controller="role-all">
-                                <tr ng-repeat="role in roles">
-                                    <td>{{$index + 1}}</td>
-                                    <td>{{role.name}}</td>
-                                    <td>{{role.description}}</td>
+                                <tbody>
+                                <tr th:each="item : ${roles}">
+                                    <td th:text="${itemStat.count}"></td>
+                                    <td th:text="${item.name}"></td>
+                                    <td th:text="${item.description}"></td>
                                     <td>
-                                        <a href="/role/edit?id={{role.id}}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
-                                        <a href="/role/delete?id={{role.id}}"
-                                           class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
+                                        <a th:href="@{/admin/role/edit(id=${item.id})}" class="btn btn-sm btn-info btn-round py-1 font-weight-bold">Sửa</a>
+                                        <a th:href="@{/admin/role/delete(id=${item.id})}" class="btn btn-sm btn-danger btn-round py-1 font-weight-bold">Xóa</a>
                                     </td>
                                 </tr>
                                 <!--                                body by jquery-->

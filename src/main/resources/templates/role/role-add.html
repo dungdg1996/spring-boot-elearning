@@ -29,26 +29,24 @@
                         <h2 class="text-uppercase text-center">Thêm mới quyền</h2>
                     </div>
                     <div class="card-block">
-                        <form action="/role/add" method="post">
+                        <form th:action="@{/admin/role/add}" th:object="${role}" method="post">
                             <div class="row">
                                 <div class="col-md-6 m-auto">
                                     <div class="form-group">
                                         <label>Tên quyền</label>
-                                        <input type="text" path="name" id="name"
-                                               class="form-control"/>
+                                        <input th:field="*{name}" type="text" id="name" class="form-control"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả</label>
-                                        <input type="text" path="description" id="desc"
-                                               class="form-control"/>
+                                        <input th:field="*{description}" type="text"  id="desc" class="form-control"/>
+                                        <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
                                     </div>
                                     <div class="form-group mt-3">
                                         <button type="button" onclick="addRole()"
                                                 class="btn btn-primary m-b-0">Lưu lại
                                         </button>
-                                        <a th:href="@{/role}"
-                                           class="btn btn-secondary text-white">Quay
-                                            lại</a>
+                                        <a th:href="@{/admin/role}" class="btn btn-secondary text-white">Quay lại</a>
                                     </div>
                                 </div>
                             </div>
@@ -59,35 +57,6 @@
         </div>
     </div>
 </div>
-    <script layout:fragment="inner-script">
-        function addRole() {
-            // Lấy thông tin từ form
-            let name = document.getElementById('name').value;
-            let desc = document.getElementById('desc').value;
-            // Gọi api để thêm mới
-            axios({
-                url: 'http://localhost:8080/api/roles',
-                method: 'POST',
-                data: {
-                    "id": "",
-                    "name": name,
-                    "description": desc
-                }
-            })
-                .then(function (response) { // Xử lý response trả về
-                    console.log(response);
-                    if (response.status === 201)
-                        swal("Thông báo!", "Thêm mới thành công!", "success");
-                    else
-                        swal("Thông báo!", "Thêm mới thất bại!", "error");
-                    window.location.href = '/role';
-                })
-                .catch(function (error) { // Xử lý error trả về
-                    console.log(error);
-                    swal("Thông báo!", "Thêm mới thất bại!", "error");
-                })
-        }
-    </script>
 </body>
 
 </html>

@@ -2,10 +2,7 @@ package com.myclass.elearning.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -13,9 +10,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "users")
@@ -38,6 +34,7 @@ public class User {
     @Column(name = "role_id")
     private int roleId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id", updatable = false, insertable = false)
     private Role role;

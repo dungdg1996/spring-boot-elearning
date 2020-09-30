@@ -1,16 +1,13 @@
 package com.myclass.elearning.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "videos")
 public class Video {
@@ -26,6 +23,11 @@ public class Video {
     @NotBlank(message = "Bạn chưa tải ảnh cho video")
     private String image;
 
-    @JoinColumn(name = "course_id")
+    @Column(name = "course_id")
     private int courseId;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "id",
+            updatable = false, insertable = false)
+    private Course course;
 }

@@ -4,7 +4,6 @@ import com.myclass.elearning.dto.TargetPostDto;
 import com.myclass.elearning.entity.Target;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface TargetService {
     List<Target> findAll();

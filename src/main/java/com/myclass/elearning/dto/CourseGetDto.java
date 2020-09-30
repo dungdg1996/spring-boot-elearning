@@ -1,5 +1,6 @@
 package com.myclass.elearning.dto;
 
+import com.myclass.elearning.entity.Category;
 import com.myclass.elearning.entity.Target;
 import com.myclass.elearning.entity.Video;
 import lombok.Data;
@@ -20,9 +21,9 @@ public class CourseGetDto {
     private double promotionPrice;
     private String description;
     private String content;
-    private int categoryId;
     private Date lastUpdate;
 
+    private Category category;
     private Set<Target> targets;
     private Set<Video> videos;
 }

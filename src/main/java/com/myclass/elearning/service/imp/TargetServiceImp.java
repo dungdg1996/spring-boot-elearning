@@ -7,9 +7,11 @@ import com.myclass.elearning.service.TargetService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(rollbackOn = Exception.class)
 public class TargetServiceImp implements TargetService {
     private final TargetRepo targetRepo;
     private final ModelMapper modelMapper;

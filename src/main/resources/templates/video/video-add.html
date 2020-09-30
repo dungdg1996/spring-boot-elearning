@@ -27,7 +27,7 @@
                         <h2 class="text-uppercase text-center">Thêm mới video</h2>
                     </div>
                     <div class="card-block">
-                        <form th:action="@{/video/add}" th:object="${video}" method="post">
+                        <form th:action="@{/admin/video/add}" th:object="${video}" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Hình đại diện</label>
-                                        <input th:field="*{image}" type="text" class="form-control" />
+                                        <input th:field="*{image}" type="file" class="form-control" />
                                         <span class="text-danger" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="col-12">
                                     <div class="form-group mt-3">
                                         <button type="submit" class="btn btn-primary m-b-0">Lưu lại</button>
-                                        <a th:href="@{/video}" class="btn btn-secondary text-white">Quay lại</a>
+                                        <a th:href="@{/admin/video}" class="btn btn-secondary text-white">Quay lại</a>
                                     </div>
                                 </div>
                             </div>

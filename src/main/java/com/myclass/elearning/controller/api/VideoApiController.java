@@ -1,12 +1,14 @@
 package com.myclass.elearning.controller.api;
 
 import com.myclass.elearning.dto.VideoPutDto;
+import com.myclass.elearning.entity.Course;
 import com.myclass.elearning.entity.Video;
-import com.myclass.elearning.exception.VideoNotFoundException;
+import com.myclass.elearning.service.StorageService;
 import com.myclass.elearning.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,9 +16,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class VideoApiController {
     private final VideoService videoService;
+    private final StorageService storageService;
 
-    public VideoApiController(VideoService videoService) {
+    public VideoApiController(VideoService videoService, StorageService storageService) {
         this.videoService = videoService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/videos")
@@ -25,9 +29,8 @@ public class VideoApiController {
     }
 
     @GetMapping("/videos/{id}")
-    public ResponseEntity<Video> one(@PathVariable int id) throws VideoNotFoundException {
-        return new ResponseEntity<>(videoService.findById(id)
-                .orElseThrow(VideoNotFoundException::new),
+    public ResponseEntity<Video> one(@PathVariable int id)  {
+        return new ResponseEntity<>(videoService.findById(id),
                 HttpStatus.OK);
     }
 
@@ -44,10 +47,22 @@ public class VideoApiController {
     }
 
     @DeleteMapping("/videos/{id}")
-    public Object delete(@PathVariable int id) throws VideoNotFoundException {
-        Video video = videoService.findById(id)
-                .orElseThrow(VideoNotFoundException::new);
-        videoService.delete(video);
-        return new ResponseEntity<>(video, HttpStatus.OK);
+    public Object delete(@PathVariable int id) {
+        try{
+            videoService.delete(id);
+            return new ResponseEntity<>("Xóa thành công video", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>("Xóa video không thành công : " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @PostMapping(value = "/{id}/image")
+    public Object uploadImage(@RequestParam("image") MultipartFile image, @PathVariable Integer id){
+        String imageName = storageService.store(image);
+        Video video = videoService.findById(id);
+        if (!image.isEmpty()) video.setImage(storageService.store(image));
+        videoService.save(video);
+        return ResponseEntity.ok().body("Lưu image thành công");
     }
 }
